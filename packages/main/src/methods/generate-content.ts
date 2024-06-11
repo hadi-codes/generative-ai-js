@@ -40,7 +40,7 @@ export async function generateContentStream(
     JSON.stringify(params),
     requestOptions,
   );
-  return processStream(response);
+  return processStream(response as any);
 }
 
 export async function generateContent(

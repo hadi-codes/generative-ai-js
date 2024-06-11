@@ -14,7 +14,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
+import fetch from "node-fetch";
+import { Response, Headers } from "node-fetch";
 import { expect, use } from "chai";
 import { match, restore, stub } from "sinon";
 import * as sinonChai from "sinon-chai";

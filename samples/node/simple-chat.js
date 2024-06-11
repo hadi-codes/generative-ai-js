@@ -15,10 +15,19 @@
  * limitations under the License.
  */
 
+import { SocksProxyAgent } from 'socks-proxy-agent';
+
 import { genAI } from "./utils/common.js";
 
 async function run() {
-  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest"});
+  const agent = new SocksProxyAgent(
+    'socks://xxx:xxx@192.168.1.1:1080'
+  );
+
+  const model = genAI.getGenerativeModel(
+    { model: "gemini-1.5-flash-latest" },
+    { httpAgent: agent },
+  );
 
   const chat = model.startChat();
 

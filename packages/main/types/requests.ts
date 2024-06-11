@@ -23,6 +23,8 @@ import {
   TaskType,
 } from "./enums";
 
+import { Headers } from "node-fetch";
+
 /**
  * Base parameters for a number of methods.
  * @public
@@ -176,6 +178,8 @@ export interface RequestOptions {
    * Custom HTTP request headers.
    */
   customHeaders?: Headers | Record<string, string>;
+
+  httpAgent?: any;
 }
 
 /**

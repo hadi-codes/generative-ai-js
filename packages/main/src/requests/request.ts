@@ -21,6 +21,8 @@ import {
   GoogleGenerativeAIFetchError,
   GoogleGenerativeAIRequestInputError,
 } from "../errors";
+import fetch from "node-fetch";
+import { RequestInit, Response, Headers } from "node-fetch";
 
 export const DEFAULT_BASE_URL = "https://generativelanguage.googleapis.com";
 
@@ -123,6 +125,7 @@ export async function constructRequest(
     url: url.toString(),
     fetchOptions: {
       ...buildFetchOptions(requestOptions),
+
       method: "POST",
       headers: await getHeaders(url),
       body,
@@ -179,7 +182,7 @@ export async function _makeRequestInternal(
       let message = "";
       let errorDetails;
       try {
-        const json = await response.json();
+        const json = (await response.json()) as any;
         message = json.error.message;
         if (json.error.details) {
           message += ` ${JSON.stringify(json.error.details)}`;
@@ -227,6 +230,9 @@ function buildFetchOptions(requestOptions?: RequestOptions): RequestInit {
     const signal = abortController.signal;
     setTimeout(() => abortController.abort(), requestOptions.timeout);
     fetchOptions.signal = signal;
+  }
+  if (requestOptions.httpAgent) {
+    fetchOptions.agent = requestOptions.httpAgent;
   }
   return fetchOptions;
 }
