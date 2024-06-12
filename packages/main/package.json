@@ -46,5 +46,8 @@
   "bugs": {
     "url": "https://github.com/google/generative-ai-js/issues"
   },
-  "homepage": "https://github.com/google/generative-ai-js#readme"
+  "homepage": "https://github.com/google/generative-ai-js#readme",
+  "dependencies": {
+    "node-fetch": "^3.3.2"
+  }
 }
